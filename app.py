@@ -15,6 +15,7 @@ def create_app(test_db=None):
     CORS(app)
     return app
 
+
 APP = create_app()
 
 
@@ -88,7 +89,7 @@ def update_actor(payload, actor_id):
     actor = Actor.query.get(actor_id)
 
     if actor is None:
-        abort(404, description=f'An actor with actor_id {actor_id} was not found.')
+        abort(404, description=f'Actor_id {actor_id} not found.')
 
     try:
         name = body.get('name', None)
@@ -96,12 +97,12 @@ def update_actor(payload, actor_id):
         gender = body.get('gender', None)
 
         if name is not None:
-            actor.name = name 
+            actor.name = name
         if age is not None:
-            actor.age = age 
+            actor.age = age
         if gender is not None:
             actor.gender = gender
-        
+
         actor.update()
 
         return jsonify({
@@ -123,7 +124,7 @@ DELETE /actors/<actor_id>
 def delete_actor(payload, actor_id):
     actor = Actor.query.get(actor_id)
     if actor is None:
-        abort(404, description=f'An actor with actor_id {actor_id} was not found.')
+        abort(404, description=f'Actor_id {actor_id} not found.')
 
     try:
         if actor is not None:
@@ -198,7 +199,7 @@ def update_movie(payload, movie_id):
     movie = Movie.query.get(movie_id)
 
     if movie is None:
-        abort(404, description=f'A movie with movie_id {movie_id} was not found.')
+        abort(404, description=f'Movie_id {movie_id} not found.')
 
     try:
         title = body.get('title', None)
@@ -211,7 +212,7 @@ def update_movie(payload, movie_id):
             movie.release_year = release_year
         if genre is not None:
             movie.genre = genre
-        
+
         movie.update()
 
         return jsonify({
@@ -233,7 +234,7 @@ DELETE /movies/<movie_id>
 def delete_movie(payload, movie_id):
     movie = Movie.query.get(movie_id)
     if movie is None:
-        abort(404, description=f'A movie with movie_id {movie_id} was not found.')
+        abort(404, description=f'Movie_id {movie_id} not found.')
 
     try:
         if movie is not None:
@@ -263,16 +264,19 @@ def add_actor_to_movie(payload, movie_id):
 
     movie = Movie.query.get(movie_id)
     if not movie:
-        abort(404, description=f'A movie with movie_id {movie_id} was not found.')
+        abort(404, description=f'Movie_id {movie_id} not found.')
 
     actor = Actor.query.get(actor_id)
     if not actor:
-        abort(404, description=f'An actor with actor_id {actor_id} was not found.')
+        abort(404, description=f'Actor_id {actor_id} not found.')
 
-    existing_role = Role.query.filter((Role.movie_id == movie_id) & (Role.actor_id == actor_id)).one_or_none()
+    existing_role = Role.query.filter(
+        (Role.movie_id == movie_id) & (Role.actor_id == actor_id))\
+        .one_or_none()
     if existing_role:
-        abort(409, description=f'actor_id {actor_id} already has a role in movie_id {movie_id}')
-    
+        abort(409, description=f'actor_id {actor_id} \
+            already has a role in movie_id {movie_id}')
+
     try:
         role = Role(movie_id=movie_id, actor_id=actor_id)
         role.insert()
@@ -296,16 +300,19 @@ DELETE /movies/<movie_id>/actors/<actor_id>
 def delete_actor_from_movie(payload, movie_id, actor_id):
     movie = Movie.query.get(movie_id)
     if not movie:
-        abort(404, description=f'A movie with movie_id {movie_id} was not found.')
+        abort(404, description=f'Movie_id {movie_id} not found.')
 
     actor = Actor.query.get(actor_id)
     if not actor:
-        abort(404, description=f'An actor with actor_id {actor_id} was not found.')
+        abort(404, description=f'Actor_id {actor_id} not found.')
 
-    role = Role.query.filter((Role.movie_id == movie_id) & (Role.actor_id == actor_id)).one_or_none()
+    role = Role.query.filter(
+        (Role.movie_id == movie_id) &
+        (Role.actor_id == actor_id)).one_or_none()
     if not role:
-        abort(404, description=f'actor_id {actor_id} does not have a role in movie_id {movie_id}')
-    
+        abort(404, description=f'actor_id {actor_id} \
+            does not have a role in movie_id {movie_id}')
+
     try:
         if role is not None:
             role.delete()

@@ -12,13 +12,14 @@ def setup_db(app, db_name=None):
         app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DEV_DATABASE_URL')
     else:
         db_user = getenv('DATABASE_USER')
-        db_password = getenv('DATABASE_PASSWORD')
+        db_pass = getenv('DATABASE_PASS')
         db_host = getenv('DATABASE_HOST')
         db_port = getenv('DATABASE_PORT')
         if not db_name:
             db_name = getenv('DATABASE_USER')
 
-        app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+        app.config["SQLALCHEMY_DATABASE_URI"] = \
+            f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
     db.app = app
     db.init_app(app)
 
@@ -58,7 +59,7 @@ class Actor(db.Model):
             'age': self.age,
             'gender': self.gender
         }
-    
+
     def __repr__(self):
         return f'<Actor {self.id} - {self.name}>'
 
