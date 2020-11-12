@@ -43,13 +43,13 @@ delete:movies |                    |                    | :white_check_mark: |
 To request any of the API endpoints described below, you must authenticate your requests using a `Bearer` token in the headers of the request.
 
 For testing purposes, you can login with the following username and password combinations:
-1. `Casting Assistant`
+1. **Casting Assistant**
     - login: `joe@casting-agency.com`
     - password: `abcd1234!@$`
-2. `Casting Director`
+2. **Casting Director**
     - login: `ann@casting-agency.com`
     - password: `abcd1234!@$`
-3. `Executive Producer`
+3. **Executive Producer**
     - login: `adam@casting-agency.com`
     - password: `abcd1234!@$`
 
@@ -152,6 +152,8 @@ The HTML test reports from different test runs can be found in the `test-results
 
 ## Endpoints
 
+The Casting Agency API can be tested using **Postman** or **cURL**.
+
 ### GET /
 - Default route - it returns the string “This is the Casting Agency API”
 - It is a public endpoint
@@ -170,53 +172,53 @@ This is the Casting Agency API
 - Request arguments: None
 
 **Testing using cURL**
-- Export the token for the Casting Assistant: `export TOKEN='bearer token goes here'`
+- Export the token for the Casting Assistant: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" https://mg-casting-agency.herokuapp.com/actors`
 - Response (200 OK):
 ```
 {
-  "actors": [
-    {
-      "age": 35, 
-      "gender": "female", 
-      "id": 1, 
-      "movies": [
+    "actors": [
         {
-          "genre": "Thriller", 
-          "release_year": "2011", 
-          "title": "The Girl with the Dragon Tattoo"
-        }
-      ], 
-      "name": "Rooney Mara"
-    }, 
-    {
-      "age": 62, 
-      "gender": "male", 
-      "id": 2, 
-      "movies": [
+            "age": 35,
+            "gender": "female",
+            "id": 1,
+            "movies": [
+                {
+                    "genre": "Thriller",
+                    "release_year": "2011",
+                    "title": "The Girl with the Dragon Tattoo"
+                }
+            ],
+            "name": "Rooney Mara"
+        },
         {
-          "genre": "Drama", 
-          "release_year": "1994", 
-          "title": "The Shawshank Redemption"
-        }
-      ], 
-      "name": "Tim Robbins"
-    }, 
-    {
-      "age": 28, 
-      "gender": "male", 
-      "id": 3, 
-      "movies": [
+            "age": 62,
+            "gender": "male",
+            "id": 2,
+            "movies": [
+                {
+                    "genre": "Drama",
+                    "release_year": "1994",
+                    "title": "The Shawshank Redemption"
+                }
+            ],
+            "name": "Tim Robbins"
+        },
         {
-          "genre": "Thriller", 
-          "release_year": "2008", 
-          "title": "The Dark Knight"
+            "age": 28,
+            "gender": "male",
+            "id": 3,
+            "movies": [
+                {
+                    "genre": "Thriller",
+                    "release_year": "2008",
+                    "title": "The Dark Knight"
+                }
+            ],
+            "name": "Heath Ledger"
         }
-      ], 
-      "name": "Heath Ledger"
-    }
-  ], 
-  "success": true
+    ],
+    "success": true
 }
 ```
 
@@ -225,20 +227,31 @@ This is the Casting Agency API
 - It requires the `post:actors` permission
 - Request arguments: None
 
+**Testing using Postman**
+- Set the Bearer token for the Casting Director on the `Authorization` tab
+- Request Body:
+```
+{
+    "name":"Joaquin Phoenix", 
+    "age":46, 
+    "gender":"male"
+}
+```
+
 **Testing using cURL**
-- Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
+- Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X POST https://mg-casting-agency.herokuapp.com/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Joaquin Phoenix", "age":46, "gender":"male"}'`
 - Response (200 OK):
 ```
 {
-  "actor": {
-    "age": 46, 
-    "gender": "male", 
-    "id": 23, 
-    "movies": [], 
-    "name": "Joaquin Phoenix"
-  }, 
-  "success": true
+    "actor": {
+        "age": 46,
+        "gender": "male",
+        "id": 24,
+        "movies": [],
+        "name": "Joaquin Phoenix"
+    },
+    "success": true
 }
 ```
 
@@ -247,26 +260,38 @@ This is the Casting Agency API
 - It requires the `patch:actors` permission
 - Request arguments: `actor_id` (integer, mandatory)
 
+**Testing using Postman**
+- Set the Bearer token for the Casting Director on the `Authorization` tab
+- Request Body:
+```
+{
+    "name":"Tim Robbins", 
+    "age":62, 
+    "gender":"male", 
+    "movie_id":4
+}
+```
+
 **Testing using cURL**
-- Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
-- Request: `curl -X PATCH https://mg-casting-agency.herokuapp.com/actors/2 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Harrison Ford", "age":78, "gender":"male", "movie_id":4}'`
+- Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
+- Request: `curl -X PATCH https://mg-casting-agency.herokuapp.com/actors/2 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Tim Robbins", "age":62, "gender":"male", "movie_id":4}'`
 - Response (200 OK):
 ```
 {
-  "actor": {
-    "age": 78, 
-    "gender": "male", 
-    "id": 2, 
-    "movies": [
-      {
-        "genre": "Drama", 
-        "release_year": "1994", 
-        "title": "The Shawshank Redemption"
-      }
-    ], 
-    "name": "Harrison Ford"
-  }, 
-  "success": true
+    "actor": {
+        "age": 62,
+        "gender": "male",
+        "id": 2,
+        "movies": [
+            {
+                "genre": "Drama",
+                "release_year": "1994",
+                "title": "The Shawshank Redemption"
+            }
+        ],
+        "name": "Tim Robbins"
+    },
+    "success": true
 }
 ```
 
@@ -276,13 +301,13 @@ This is the Casting Agency API
 - Request arguments: `actor_id` (integer, mandatory)
 
 **Testing using cURL**
-- Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
-- Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/actors/23 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
+- Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
+- Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/actors/24 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
 ```
 {
-  "actor_id": 23, 
-  "success": true
+    "actor_id": 24,
+    "success": true
 }
 ```
 
@@ -292,57 +317,83 @@ This is the Casting Agency API
 - Request arguments: None
 
 **Testing using cURL**
-- Export the token for the Casting Assistant: `export TOKEN='bearer token goes here'`
+- Export the token for the Casting Assistant: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" https://mg-casting-agency.herokuapp.com/movies`
 - Response (200 OK):
 ```
 {
-  "movies": [
-    {
-      "actors": [
+    "movies": [
         {
-          "age": 82, 
-          "gender": "male", 
-          "name": "Morgan Freeman"
-        }, 
+            "actors": [
+                {
+                    "age": 62,
+                    "gender": "male",
+                    "name": "Tim Robbins"
+                },
+                {
+                    "age": 82,
+                    "gender": "male",
+                    "name": "Morgan Freeman"
+                }
+            ],
+            "genre": "Drama",
+            "id": 1,
+            "release_year": "1994",
+            "title": "The Shawshank Redemption"
+        },
         {
-          "age": 78, 
-          "gender": "male", 
-          "name": "Harrison Ford"
+            "actors": [],
+            "genre": "Drama",
+            "id": 2,
+            "release_year": "1972",
+            "title": "The Godfather"
+        },
+        {
+            "actors": [
+                {
+                    "age": 28,
+                    "gender": "male",
+                    "name": "Heath Ledger"
+                },
+                {
+                    "age": 82,
+                    "gender": "male",
+                    "name": "Morgan Freeman"
+                }
+            ],
+            "genre": "Thriller",
+            "id": 3,
+            "release_year": "2008",
+            "title": "The Dark Knight"
+        },
+        {
+            "actors": [
+                {
+                    "age": 65,
+                    "gender": "male",
+                    "name": "J.K. Simmons"
+                }
+            ],
+            "genre": "Drama",
+            "id": 4,
+            "release_year": "2015",
+            "title": "Whiplash"
+        },
+        {
+            "actors": [
+                {
+                    "age": 35,
+                    "gender": "female",
+                    "name": "Rooney Mara"
+                }
+            ],
+            "genre": "Thriller",
+            "id": 5,
+            "release_year": "2011",
+            "title": "The Girl with the Dragon Tattoo"
         }
-      ], 
-      "genre": "Drama", 
-      "id": 1, 
-      "release_year": "1994", 
-      "title": "The Shawshank Redemption"
-    }, 
-    {
-      "actors": [], 
-      "genre": "Drama", 
-      "id": 2, 
-      "release_year": "1972", 
-      "title": "The Godfather"
-    }, 
-    {
-      "actors": [
-        {
-          "age": 28, 
-          "gender": "male", 
-          "name": "Heath Ledger"
-        }, 
-        {
-          "age": 82, 
-          "gender": "male", 
-          "name": "Morgan Freeman"
-        }
-      ], 
-      "genre": "Thriller", 
-      "id": 3, 
-      "release_year": "2008", 
-      "title": "The Dark Knight"
-    }
-  ], 
-  "success": true
+    ],
+    "success": true
 }
 
 ```
@@ -352,20 +403,31 @@ This is the Casting Agency API
 - It requires the `post:movies` permission
 - Request arguments: None
 
+**Testing using Postman**
+- Set the Bearer token for the Executive Producer on the `Authorization` tab
+- Request Body:
+```
+{
+    "title":"The Fugitive", 
+    "release_year":"1993", 
+    "genre":"Action"
+}
+```
+
 **Testing using cURL**
-- Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
+- Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X POST https://mg-casting-agency.herokuapp.com/movies -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"The Fugitive", "release_year":"1993", "genre":"Action"}'`
 - Response (200 OK):
 ```
 {
-  "movie": {
-    "actors": [], 
-    "genre": "Action", 
-    "id": 34, 
-    "release_year": "1993", 
-    "title": "The Fugitive"
-  }, 
-  "success": true
+    "movie": {
+        "actors": [],
+        "genre": "Action",
+        "id": 34,
+        "release_year": "1993",
+        "title": "The Fugitive"
+    },
+    "success": true
 }
 ```
 
@@ -374,26 +436,37 @@ This is the Casting Agency API
 - It requires the `patch:movies` permission
 - Request arguments: `movie_id` (integer, mandatory)
 
+**Testing using Postman**
+- Set the Bearer token for the Casting Director on the `Authorization` tab
+- Request Body:
+```
+{
+    "title":"Blade Runer", 
+    "release_year":"1982", 
+    "genre":"Sci-Fi"
+}
+```
+
 **Testing using cURL**
-- Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
+- Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X PATCH https://mg-casting-agency.herokuapp.com/movies/10 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"Blade Runer", "release_year":"1982", "genre":"Sci-Fi"}'`
 - Response (200 OK):
 ```
 {
-  "movie": {
-    "actors": [
-      {
-        "age": 56, 
-        "gender": "male", 
-        "name": "Brad Pitt"
-      }
-    ], 
-    "genre": "Sci-Fi", 
-    "id": 10, 
-    "release_year": "1982", 
-    "title": "Blade Runer"
-  }, 
-  "success": true
+    "movie": {
+        "actors": [
+            {
+                "age": 56,
+                "gender": "male",
+                "name": "Brad Pitt"
+            }
+        ],
+        "genre": "Sci-Fi",
+        "id": 10,
+        "release_year": "1982",
+        "title": "Blade Runer"
+    },
+    "success": true
 }
 ```
 
@@ -403,13 +476,13 @@ This is the Casting Agency API
 - Request arguments: `movie_id` (integer, mandatory)
 
 **Testing using cURL**
-- Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
-- Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/movies/33 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
+- Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
+- Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/movies/34 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
 ```
 {
-  "movie_id": 33, 
-  "success": true
+    "movie_id": 34,
+    "success": true
 }
 ```
 
@@ -418,26 +491,35 @@ This is the Casting Agency API
 - It requires the `post:movies` permission
 - Request arguments: `movie_id` (integer, mandatory)
 
+**Testing using Postman**
+- Set the Bearer token for the Executive Producer on the `Authorization` tab
+- Request Body:
+```
+{
+    "actor_id":15
+}
+```
+
 **Testing using cURL**
-- Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
+- Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X POST https://mg-casting-agency.herokuapp.com/movies/8/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"actor_id":15}'`
 - Response (200 OK):
 ```
 {
-  "movie": {
-    "actors": [
-      {
-        "age": 55, 
-        "gender": "female", 
-        "name": "Viola Davis"
-      }
-    ], 
-    "genre": "Drama", 
-    "id": 8, 
-    "release_year": "2011", 
-    "title": "The Help"
-  }, 
-  "success": true
+    "movie": {
+        "actors": [
+            {
+                "age": 55,
+                "gender": "female",
+                "name": "Viola Davis"
+            }
+        ],
+        "genre": "Drama",
+        "id": 8,
+        "release_year": "2011",
+        "title": "The Help"
+    },
+    "success": true
 }
 ```
 
@@ -447,14 +529,14 @@ This is the Casting Agency API
 - Request arguments: `movie_id` (integer, mandatory), `actor_id` (integer, mandatory)
  
 **Testing using cURL**
-- Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
+- Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/movies/8/actors/15 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
 ```
 {
-  "actor_id": 15, 
-  "movie_id": 8, 
-  "success": true
+    "actor_id": 15,
+    "movie_id": 8,
+    "success": true
 }
 ```
 
@@ -476,5 +558,6 @@ The API will return the following error types when requests fail:
 - 401: Unauthorized
 - 403: Forbidden
 - 404: Not Found
+- 405: Method Not Allowed
 - 409: Conflict
 - 422: Unprocessable Request
