@@ -369,15 +369,6 @@ def not_found(error):
     }), 404
 
 
-@APP.errorhandler(405)
-def not_found(error):
-    return jsonify({
-        'success': False,
-        'error': 405,
-        'message': error.description
-    }), 405
-
-
 @APP.errorhandler(409)
 def resource_conflict(error):
     return jsonify({
