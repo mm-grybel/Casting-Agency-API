@@ -3,9 +3,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 SECRET_KEY = os.urandom(32)
 
-DEV_DATABASE_URL = os.environ.get('DEV_DATABASE_URL') or 'postgresql:///agency_dev'
+DATABASE_URL = os.environ.get('DATABASE_URL') or 'postgresql:///agency'
 TEST_DATABASE_URL = os.environ.get('TEST_DATABASE_URL') or 'postgresql:///agency_test'
-POD_DATABASE_URL = os.environ.get('PROD_DATABASE_URL') or 'postgresql:///agency_prod'
+PROD_DATABASE_URL = os.environ.get('PROD_DATABASE_URL') or 'postgresql:///agency_prod'
 
 auth0_config = {
     'AUTH0_DOMAIN': 'fsnd-casting-agency.eu.auth0.com',

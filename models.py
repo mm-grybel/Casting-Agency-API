@@ -7,7 +7,7 @@ db = SQLAlchemy()
 
 def setup_db(app, db_name=None):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = config.DEV_DATABASE_URL
+    app.config['SQLALCHEMY_DATABASE_URI'] = config.DATABASE_URL
     db.app = app
     db.init_app(app)
 
