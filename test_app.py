@@ -1,5 +1,6 @@
 import json
 import unittest
+import HtmlTestRunner
 from flask_sqlalchemy import SQLAlchemy
 
 import config
@@ -859,4 +860,4 @@ class CastingAgencyTestCase(unittest.TestCase):
 
 # Make the tests conveniently executable
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="./test_results/"))
