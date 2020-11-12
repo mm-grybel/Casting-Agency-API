@@ -16,13 +16,14 @@ The Casting Agency API allows for:
 
 The application is deployed to Heroku at: https://mg-casting-agency.herokuapp.com/
 
-## Roles and Permissions**
+## Roles and Permissions
 
 There are 3 different roles defined for accessing the Casting Agency API:
 1. Casting Assistant
 2. Casting Director
 3. Executive Producer
 
+<br/>
 
 **Permissions**   | **Casting Assistant**  | **Casting Director**   | **Executive Producer** |
 ------------- | -----------------  | ------------------ | ------------------ |
@@ -35,6 +36,7 @@ post:movies   |                    |                    | :white_check_mark: |
 patch:movies  |                    | :white_check_mark: | :white_check_mark: |
 delete:movies |                    |                    | :white_check_mark: |
 
+<br/>
 
 ## Setting up authentication
 
@@ -131,6 +133,7 @@ The HTML test reports from different test runs can be found in the `test-results
 
 ## Casting Agency API Reference
 
+<br/>
 
 | **Resource URL**         | **Method** | **Description**                      | **Permission** |
 | ------------------------ | ---------- | ------------------------------------ | -------------  |
@@ -147,9 +150,9 @@ The HTML test reports from different test runs can be found in the `test-results
 | /movies/`<int:movie_id>`/actors/`<int:actor_id>` | DELETE | Delete an actor from a movie | delete:movies |
 
 
-### Endpoints
+## Endpoints
 
-#### GET /
+### GET /
 - Default route - it returns the string “This is the Casting Agency API”
 - It is a public endpoint
 - Request arguments: None
@@ -161,7 +164,7 @@ The HTML test reports from different test runs can be found in the `test-results
 This is the Casting Agency API
 ```
 
-#### GET /actors
+### GET /actors
 - Return all actors
 - It requires the `get:actors` permission
 - Request arguments: None
@@ -217,7 +220,7 @@ This is the Casting Agency API
 }
 ```
 
-#### POST /actors
+### POST /actors
 - Add a new actor
 - It requires the `post:actors` permission
 - Request arguments: None
@@ -239,7 +242,7 @@ This is the Casting Agency API
 }
 ```
 
-#### PATCH /actors/`<int:actor_id>`
+### PATCH /actors/`<int:actor_id>`
 - Update an actor with a given ID if the ID exists
 - It requires the `patch:actors` permission
 - Request arguments: `actor_id` (integer, mandatory)
@@ -267,7 +270,7 @@ This is the Casting Agency API
 }
 ```
 
-#### DELETE /actors/`<int:actor_id>`
+### DELETE /actors/`<int:actor_id>`
 - Delete an actor with a given ID if the ID exists
 - It requires the `delete:actors` permission
 - Request arguments: `actor_id` (integer, mandatory)
@@ -283,7 +286,7 @@ This is the Casting Agency API
 }
 ```
 
-#### GET /movies
+### GET /movies
 - Return all movies
 - It requires the `get:movies` permission
 - Request arguments: None
@@ -344,7 +347,7 @@ This is the Casting Agency API
 
 ```
 
-#### POST /movies/
+### POST /movies/
 - Add a new movie
 - It requires the `post:movies` permission
 - Request arguments: None
@@ -366,7 +369,7 @@ This is the Casting Agency API
 }
 ```
 
-#### PATCH /movies/`<int:movie_id>`
+### PATCH /movies/`<int:movie_id>`
 - Update a movie with a given ID if the ID exists
 - It requires the `patch:movies` permission
 - Request arguments: `movie_id` (integer, mandatory)
@@ -394,7 +397,7 @@ This is the Casting Agency API
 }
 ```
 
-#### DELETE /movies/`<int:movie_id>`
+### DELETE /movies/`<int:movie_id>`
 - Delete a movie with a given ID if the ID exists
 - It requires the `delete:movies` permission
 - Request arguments: `movie_id` (integer, mandatory)
@@ -410,7 +413,7 @@ This is the Casting Agency API
 }
 ```
 
-#### POST /movies/`<int:movie_id>`/actors
+### POST /movies/`<int:movie_id>`/actors
 - Add an actor to a movie
 - It requires the `post:movies` permission
 - Request arguments: `movie_id` (integer, mandatory)
@@ -438,7 +441,7 @@ This is the Casting Agency API
 }
 ```
 
-#### DELETE /movies/`<int:movie_id>`/actors/`<int:actor_id>`
+### DELETE /movies/`<int:movie_id>`/actors/`<int:actor_id>`
 - Delete an actor from a movie
 - It requires the `delete:movies` permission
 - Request arguments: `movie_id` (integer, mandatory), `actor_id` (integer, mandatory)
@@ -455,6 +458,7 @@ This is the Casting Agency API
 }
 ```
 
+<br/>
 
 ### Error Handling
 Errors are returned as JSON objects in the following format:
