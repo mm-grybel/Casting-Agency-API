@@ -11,15 +11,18 @@ The Casting Agency API allows for:
 5. Adding actors to movies.
 6. Removing actors from movies.
 
+
 ## Hosted Application
 
-The application is deployed to Heroku at: [https://mg-casting-agency.herokuapp.com/] (https://mg-casting-agency.herokuapp.com/)
+The application is deployed to Heroku at: https://mg-casting-agency.herokuapp.com/
 
-**Roles and Permissions**
+## Roles and Permissions**
+
 There are 3 different roles defined for accessing the Casting Agency API:
 1. Casting Assistant
 2. Casting Director
 3. Executive Producer
+
 
 **Permissions**   | **Casting Assistant**  | **Casting Director**   | **Executive Producer** |
 ------------- | -----------------  | ------------------ | ------------------ |
@@ -32,9 +35,10 @@ post:movies   |                    |                    | :white_check_mark: |
 patch:movies  |                    | :white_check_mark: | :white_check_mark: |
 delete:movies |                    |                    | :white_check_mark: |
 
+
 ## Setting up authentication
 
-To request any of the API endpoint described below, you must authenticate your requests using a `Bearer` token in the headers of the request.
+To request any of the API endpoints described below, you must authenticate your requests using a `Bearer` token in the headers of the request.
 
 For testing purposes, you can login with the following username and password combinations:
 1. `Casting Assistant`
@@ -109,9 +113,9 @@ Setting the `FLASK_ENV` variable to `development` will detect file changes and r
 ### Database Local Setup
 With PostgreSQL running, restore a database using the `agency.psql` file provided. From the root directory (`Casting-Agency-API`) in the Terminal run:
 ```bash
-dropdb --if-exists agency_dev
-createdb agency_dev
-psql agency_dev < agency.psql
+dropdb --if-exists agency
+createdb agency
+psql agency < agency.psql
 ```
 
 ## Testing locally
@@ -126,6 +130,7 @@ The `HtmlTestRunner` package is used to generate human-readable HTML test report
 The HTML test reports from different test runs can be found in the `test-results` directory.
 
 ## Casting Agency API Reference
+
 
 | **Resource URL**         | **Method** | **Description**                      | **Permission** |
 | ------------------------ | ---------- | ------------------------------------ | -------------  |
@@ -150,7 +155,7 @@ The HTML test reports from different test runs can be found in the `test-results
 - Request arguments: None
 
 **Testing using cURL**
-- Request: `curl http://127.0.0.1:5000/`
+- Request: `curl https://mg-casting-agency.herokuapp.com/`
 - Response (200 OK):
 ```
 This is the Casting Agency API
@@ -163,7 +168,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Casting Assistant: `export TOKEN='bearer token goes here'`
-- Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" http://127.0.0.1:5000/actors`
+- Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" https://mg-casting-agency.herokuapp.com/actors`
 - Response (200 OK):
 ```
 {
@@ -219,7 +224,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
-- Request: `curl -X POST http://127.0.0.1:5000/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Joaquin Phoenix", "age":46, "gender":"male"}'`
+- Request: `curl -X POST https://mg-casting-agency.herokuapp.com/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Joaquin Phoenix", "age":46, "gender":"male"}'`
 - Response (200 OK):
 ```
 {
@@ -241,7 +246,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
-- Request: `curl -X PATCH http://127.0.0.1:5000/actors/2 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Harrison Ford", "age":78, "gender":"male", "movie_id":4}'`
+- Request: `curl -X PATCH https://mg-casting-agency.herokuapp.com/actors/2 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Harrison Ford", "age":78, "gender":"male", "movie_id":4}'`
 - Response (200 OK):
 ```
 {
@@ -269,7 +274,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
-- Request: `curl -X DELETE http://127.0.0.1:5000/actors/23 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
+- Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/actors/23 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
 ```
 {
@@ -285,7 +290,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Casting Assistant: `export TOKEN='bearer token goes here'`
-- Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" http://127.0.0.1:5000/movies`
+- Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" https://mg-casting-agency.herokuapp.com/movies`
 - Response (200 OK):
 ```
 {
@@ -346,7 +351,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
-- Request: `curl -X POST http://127.0.0.1:5000/movies -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"The Fugitive", "release_year":"1993", "genre":"Action"}'`
+- Request: `curl -X POST https://mg-casting-agency.herokuapp.com/movies -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"The Fugitive", "release_year":"1993", "genre":"Action"}'`
 - Response (200 OK):
 ```
 {
@@ -368,7 +373,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Casting Director: `export TOKEN='bearer token goes here'`
-- Request: `curl -X PATCH http://127.0.0.1:5000/movies/10 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"Blade Runer", "release_year":"1982", "genre":"Sci-Fi"}'`
+- Request: `curl -X PATCH https://mg-casting-agency.herokuapp.com/movies/10 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"Blade Runer", "release_year":"1982", "genre":"Sci-Fi"}'`
 - Response (200 OK):
 ```
 {
@@ -396,7 +401,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
-- Request: `curl -X DELETE http://127.0.0.1:5000/movies/33 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
+- Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/movies/33 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
 ```
 {
@@ -412,7 +417,7 @@ This is the Casting Agency API
 
 **Testing using cURL**
 - Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
-- Request: `curl -X POST http://127.0.0.1:5000/movies/8/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"actor_id":15}'`
+- Request: `curl -X POST https://mg-casting-agency.herokuapp.com/movies/8/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"actor_id":15}'`
 - Response (200 OK):
 ```
 {
@@ -440,7 +445,7 @@ This is the Casting Agency API
  
 **Testing using cURL**
 - Export the token for the Executive Producer: `export TOKEN='bearer token goes here'`
-- Request: `curl -X DELETE http://127.0.0.1:5000/movies/8/actors/15 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
+- Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/movies/8/actors/15 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
 ```
 {
