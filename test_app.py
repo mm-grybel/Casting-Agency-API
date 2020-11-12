@@ -860,4 +860,5 @@ class CastingAgencyTestCase(unittest.TestCase):
 
 # Make the tests conveniently executable
 if __name__ == '__main__':
-    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(output="./test_results/"))
+    unittest.main(testRunner=HtmlTestRunner.HTMLTestRunner(
+        output="./test_results/"))

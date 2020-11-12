@@ -368,6 +368,7 @@ def not_found(error):
         'message': error.description
     }), 404
 
+
 @APP.errorhandler(405)
 def method_not_allowed(error):
     return jsonify({
