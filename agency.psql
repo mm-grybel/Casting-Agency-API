@@ -1,0 +1,92 @@
+CREATE TABLE movies (
+    id serial PRIMARY KEY,
+    title varchar(120) NOT NULL,
+    release_year varchar(4),
+    genre varchar(50)
+);
+
+CREATE TABLE actors (
+    id serial PRIMARY KEY,
+    name varchar(120) NOT NULL,
+    age integer,
+    gender varchar(10)
+);
+
+CREATE TABLE roles (
+    actor_id integer REFERENCES actors (id),
+    movie_id integer REFERENCES movies (id),
+    CONSTRAINT roles_pkey PRIMARY KEY (actor_id, movie_id)
+);
+
+
+INSERT INTO movies (title, release_year, genre) VALUES
+('The Shawshank Redemption', '1994', 'Drama'),
+('The Godfather', '1972', 'Drama'),
+('The Dark Knight', '2008', 'Thriller'),
+('Whiplash', '2015', 'Drama'),
+('The Girl with the Dragon Tattoo', '2011', 'Thriller'),
+('Seven', '1995', 'Thriller'),
+('The Silence of the Lambs', '1991', 'Thriller'),
+('The Help', '2011', 'Drama'),
+('Predator', '1987', 'Action'),
+('Fight Club', '1999', 'Drama'),
+('Pulp Fiction', '1994', 'Drama'),
+('Forrest Gump', '1994', 'Drama'),
+('Heat', '1995', 'Thriller'),
+('Casino', '1995', 'Drama'),
+('Gladiator', '2000', 'Drama'),
+('12 Angry Men', '1957', 'Drama'),
+('The Matrix', '1999', 'Sci-Fi'),
+('Inception', '2010', 'Action'),
+('Goodfellas', '1990', 'Crime'),
+('Parasite', '2019', 'Drama'),
+('Interstellar', '2014', 'Sci-Fi'),
+('City of God', '2002', 'Crime'),
+('Spirited Away', '2001', 'Animation'),
+('Saving Private Ryan', '1998', 'Drama'),
+('The Green Mile', '1999', 'Drama'),
+('Life is Beautiful', '1997', 'Comedy'),
+('Joker', '2019', 'Thriller'),
+('The Prestige', '2006', 'Drama'),
+('Gladiator', '2000', 'Action'),
+('American History X', '1998', 'Drama'),
+('Leon', '1994', 'Drama'),
+('Psycho', '1960', 'Horror'),
+('Back to the Future', '1985', 'Sci-Fi');
+
+INSERT INTO actors (name, age, gender) VALUES
+('Rooney Mara', 35, 'female'),
+('Tim Robbins', 62, 'male'),
+('Heath Ledger', 28, 'male'),
+('J.K. Simmons', 65, 'male'),
+('Jodie Foster', 58, 'female'),
+('Anthony Hopkins', 82, 'male'),
+('Al Pacino', 80, 'male'),
+('Maggie Gyllenhaal', 43, 'female'),
+('Edward Norton', 51, 'male'),
+('Helena Bonham Carter', 54, 'female'),
+('Morgan Freeman', 82, 'male'),
+('Brad Pitt', 56, 'male'),
+('Russell Crowe', 56, 'male'),
+('Tom Hanks', 64, 'male'),
+('Viola Davis', 55, 'female'),
+('Anthony Perkins', 60, 'male'),
+('Gary Oldman', 62, 'male'),
+('Scarlett Johansson', 35, 'female'),
+('Anne Hathaway', 37, 'female'),
+('Jessica Chastain', 43, 'female'),
+('Robin Wright', 54, 'female'),
+('Ellen Page', 33, 'female');
+
+INSERT INTO roles (actor_id, movie_id) VALUES
+(1, 5),
+(2, 1),
+(3, 3),
+(5, 7),
+(6, 7),
+(11, 1),
+(11, 3),
+(11, 6),
+(12, 6),
+(12, 10),
+(4, 4);
