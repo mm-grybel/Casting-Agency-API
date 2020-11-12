@@ -1,25 +1,13 @@
 from os import getenv
 from flask_sqlalchemy import SQLAlchemy
-
+import config
 
 db = SQLAlchemy()
 
 
 def setup_db(app, db_name=None):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    if getenv('DATABASE_URL'):
-        app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DEV_DATABASE_URL')
-    else:
-        db_user = getenv('DATABASE_USER')
-        db_pass = getenv('DATABASE_PASS')
-        db_host = getenv('DATABASE_HOST')
-        db_port = getenv('DATABASE_PORT')
-        if not db_name:
-            db_name = getenv('DATABASE_USER')
-
-        app.config["SQLALCHEMY_DATABASE_URI"] = \
-            f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
+    app.config['SQLALCHEMY_DATABASE_URI'] = config.DEV_DATABASE_URL
     db.app = app
     db.init_app(app)
 
