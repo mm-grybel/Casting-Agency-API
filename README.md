@@ -122,7 +122,7 @@ psql agency < agency.psql
 
 ## Testing locally
 To run the tests, execute from within the root directory (`Casting-Agency-API`):
-```
+```bash
 dropdb --if-exists agency_test
 createdb agency_test
 psql agency_test < agency.psql
@@ -175,7 +175,7 @@ This is the Casting Agency API
 - Export the token for the Casting Assistant: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" https://mg-casting-agency.herokuapp.com/actors`
 - Response (200 OK):
-```
+```json 
 {
     "actors": [
         {
@@ -230,7 +230,7 @@ This is the Casting Agency API
 **Testing using Postman**
 - Set the Bearer token for the Casting Director on the `Authorization` tab
 - Request Body:
-```
+```json
 {
     "name":"Joaquin Phoenix", 
     "age":46, 
@@ -242,7 +242,7 @@ This is the Casting Agency API
 - Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X POST https://mg-casting-agency.herokuapp.com/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Joaquin Phoenix", "age":46, "gender":"male"}'`
 - Response (200 OK):
-```
+```json
 {
     "actor": {
         "age": 46,
@@ -263,7 +263,7 @@ This is the Casting Agency API
 **Testing using Postman**
 - Set the Bearer token for the Casting Director on the `Authorization` tab
 - Request Body:
-```
+```json
 {
     "name":"Tim Robbins", 
     "age":62, 
@@ -276,7 +276,7 @@ This is the Casting Agency API
 - Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X PATCH https://mg-casting-agency.herokuapp.com/actors/2 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"name":"Tim Robbins", "age":62, "gender":"male", "movie_id":4}'`
 - Response (200 OK):
-```
+```json
 {
     "actor": {
         "age": 62,
@@ -304,7 +304,7 @@ This is the Casting Agency API
 - Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/actors/24 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
-```
+```json
 {
     "actor_id": 24,
     "success": true
@@ -320,7 +320,7 @@ This is the Casting Agency API
 - Export the token for the Casting Assistant: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -H 'Accept: application/json' -H "Authorization: Bearer ${TOKEN}" https://mg-casting-agency.herokuapp.com/movies`
 - Response (200 OK):
-```
+```json
 {
     "movies": [
         {
@@ -406,7 +406,7 @@ This is the Casting Agency API
 **Testing using Postman**
 - Set the Bearer token for the Executive Producer on the `Authorization` tab
 - Request Body:
-```
+```json
 {
     "title":"The Fugitive", 
     "release_year":"1993", 
@@ -418,7 +418,7 @@ This is the Casting Agency API
 - Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X POST https://mg-casting-agency.herokuapp.com/movies -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"The Fugitive", "release_year":"1993", "genre":"Action"}'`
 - Response (200 OK):
-```
+```json
 {
     "movie": {
         "actors": [],
@@ -439,7 +439,7 @@ This is the Casting Agency API
 **Testing using Postman**
 - Set the Bearer token for the Casting Director on the `Authorization` tab
 - Request Body:
-```
+```json
 {
     "title":"Blade Runer", 
     "release_year":"1982", 
@@ -451,7 +451,7 @@ This is the Casting Agency API
 - Export the token for the Casting Director: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X PATCH https://mg-casting-agency.herokuapp.com/movies/10 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"title":"Blade Runer", "release_year":"1982", "genre":"Sci-Fi"}'`
 - Response (200 OK):
-```
+```json
 {
     "movie": {
         "actors": [
@@ -479,7 +479,7 @@ This is the Casting Agency API
 - Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/movies/34 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
-```
+```json
 {
     "movie_id": 34,
     "success": true
@@ -494,7 +494,7 @@ This is the Casting Agency API
 **Testing using Postman**
 - Set the Bearer token for the Executive Producer on the `Authorization` tab
 - Request Body:
-```
+```json
 {
     "actor_id":15
 }
@@ -504,7 +504,7 @@ This is the Casting Agency API
 - Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X POST https://mg-casting-agency.herokuapp.com/movies/8/actors -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}" -d '{"actor_id":15}'`
 - Response (200 OK):
-```
+```json
 {
     "movie": {
         "actors": [
@@ -532,7 +532,7 @@ This is the Casting Agency API
 - Export the token for the Executive Producer: `export TOKEN='your_bearer_token_goes_here'`
 - Request: `curl -X DELETE https://mg-casting-agency.herokuapp.com/movies/8/actors/15 -H "Content-Type: application/json" -H "Accept: application/json" -H "Authorization: Bearer ${TOKEN}"`
 - Response (200 OK):
-```
+```json
 {
     "actor_id": 15,
     "movie_id": 8,
@@ -545,7 +545,7 @@ This is the Casting Agency API
 ### Error Handling
 Errors are returned as JSON objects in the following format:
 
-```
+```json
 {
     "success": False,
     "error": 400,
